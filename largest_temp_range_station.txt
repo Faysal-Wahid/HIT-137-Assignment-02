@@ -1,0 +1,4 @@
+Station(s) with Largest Temperature Range
+Largest Range: 21.07
+Stations:
+WAGGA-WAGGA-AMO

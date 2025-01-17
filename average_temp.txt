@@ -1,0 +1,22 @@
+Average Temperatures for Each File
+File	Average Temperature
+stations_group_1986.csv	26.88
+stations_group_1987.csv	26.89
+stations_group_1988.csv	26.99
+stations_group_1989.csv	27.08
+stations_group_1990.csv	26.86
+stations_group_1991.csv	27.01
+stations_group_1992.csv	27.07
+stations_group_1993.csv	26.94
+stations_group_1994.csv	27.03
+stations_group_1995.csv	26.77
+stations_group_1996.csv	27.06
+stations_group_1997.csv	27.19
+stations_group_1998.csv	26.71
+stations_group_1999.csv	26.98
+stations_group_2000.csv	27.05
+stations_group_2001.csv	27.02
+stations_group_2002.csv	27.15
+stations_group_2003.csv	26.90
+stations_group_2004.csv	26.98
+stations_group_2005.csv	27.05
