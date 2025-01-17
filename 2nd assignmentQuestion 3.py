@@ -1,66 +1,52 @@
 import turtle
 
-def draw_tree(t, branch_length, depth, left_angle, right_angle, reduction_factor):
-    """
-    Draws a tree using recursion.
-
-    Parameters:
-    t (turtle.Turtle): The turtle object.
-    branch_length (float): The starting length of the branch.
-    depth (int): The depth of recursion.
-    left_angle (float): Angle for the left branch.
-    right_angle (float): Angle for the right branch.
-    reduction_factor (float): Factor to reduce branch length.
-    """
+def draw_branch(t, branch_length, left_angle, right_angle, depth, reduction_factor, is_main_branch):
     if depth == 0:
-        return  # Base case: stop recursion when depth is 0
+        return
+
+    # Set the color of the branch
+    if is_main_branch:
+        t.color("red")
+    else:
+        t.color("green")
 
     # Draw the main branch
     t.forward(branch_length)
 
-    # Draw the right subtree
+    # Draw the left branch
+    t.left(left_angle)
+    draw_branch(t, branch_length * reduction_factor, left_angle, right_angle, depth - 1, reduction_factor, False)
+    t.right(left_angle)  # Return to the main branch
+
+    # Draw the right branch
     t.right(right_angle)
-    draw_tree(t, branch_length * reduction_factor, depth - 1, left_angle, right_angle, reduction_factor)
+    draw_branch(t, branch_length * reduction_factor, left_angle, right_angle, depth - 1, reduction_factor, False)
+    t.left(right_angle)  # Return to the main branch
 
-    # Return to the main branch
-    t.left(left_angle + right_angle)
-
-    # Draw the left subtree
-    draw_tree(t, branch_length * reduction_factor, depth - 1, left_angle, right_angle, reduction_factor)
-
-    # Return to the original angle and position
-    t.right(left_angle)
+    # Move back to the previous position
     t.backward(branch_length)
 
 def main():
-    # Get user inputs
-    left_angle = float(input("Enter the left branch angle (degrees): "))
-    right_angle = float(input("Enter the right branch angle (degrees): "))
-    starting_length = float(input("Enter the starting branch length: "))
-    recursion_depth = int(input("Enter the recursion depth: "))
+    # Get user input for the parameters
+    left_angle = int(input("Enter the left branch angle (e.g., 20): "))
+    right_angle = int(input("Enter the right branch angle (e.g., 25): "))
+    starting_length = int(input("Enter the starting branch length (e.g., 100): "))
+    depth = int(input("Enter the recursion depth (e.g., 5): "))
     reduction_factor = float(input("Enter the branch length reduction factor (e.g., 0.7): "))
 
-    # Set up the screen and turtle
+    # Setup the turtle screen and turtle object
     screen = turtle.Screen()
     screen.bgcolor("white")
-    screen.title("Customizable Recursive Tree")
-
-    tree_turtle = turtle.Turtle()
-    tree_turtle.shape("classic")
-    tree_turtle.color("green")
-    tree_turtle.speed(0)
-
-    # Move to the starting position
-    tree_turtle.left(90)
-    tree_turtle.up()
-    tree_turtle.backward(starting_length / 2)
-    tree_turtle.down()
+    t = turtle.Turtle()
+    t.speed("fastest")
+    t.left(90)  # Point the turtle upwards
 
     # Draw the tree
-    draw_tree(tree_turtle, starting_length, recursion_depth, left_angle, right_angle, reduction_factor)
+    draw_branch(t, starting_length, left_angle, right_angle, depth, reduction_factor, True)
 
-    # Keep the window open
+    # Wait for the user to close the window
     screen.mainloop()
 
 if __name__ == "__main__":
     main()
+
